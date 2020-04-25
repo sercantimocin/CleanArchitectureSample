@@ -12,7 +12,7 @@
     "IIS Express": {
       "commandName": "IISExpress",
       "launchBrowser": true,
-      "launchUrl": "api/basket/help",
+      "launchUrl": "http://localhost:12345",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }

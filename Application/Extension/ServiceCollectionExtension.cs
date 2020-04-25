@@ -21,10 +21,8 @@ namespace Infrastucture.Extension
             services.AddScoped<IStockRepository, FakeStockRepository>();
 
             services.AddScoped(typeof(IPipelineBehavior<,>), typeof(ValidationHandler<,>));
-            //services.AddScoped(typeof(IPipelineBehavior<,>), typeof(CommonRequestHandler<,>));
 
             services.AddMediatR(typeof(AddProductToBasketRequestHandler));
-
 
             return services;
         }
