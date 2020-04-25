@@ -38,6 +38,7 @@ namespace Application.Products.Command
                     return new ResponseModel<bool>(HttpStatusCode.OK, "The operation cannot successful", false);
                 }
 
+                //TODO AutoMapper useful for object mapping
                 effectedCount = await _basketRepository.AddProduct(new BasketProduct
                 {
                     BasketId = request.BasketId,

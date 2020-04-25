@@ -17,12 +17,6 @@ namespace Api.Controllers
             _mediator = mediator;
         }
 
-        [HttpGet("help")]
-        public string Get()
-        {
-            return "Hello";
-        }
-
         [HttpPost("item")]
         public async Task<ResponseModel<bool>> AddBasketProductAsync(AddProductToBasketRequest request)
         {
