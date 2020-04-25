@@ -14,14 +14,19 @@ namespace Persistance.Checkout
 
         public Task<int> GetProductCount(int productId)
         {
-            string sql = "SELECT [Count] FROM Stock WHERE ProductId = @ProductId";
+            string sql = "SELECT [Count] FROM Stock (NOLOCK)  WHERE ProductId = @ProductId";
 
             return _dataHelper.QuerySingleAsync<int>(sql, new { productId });
         }
 
         public Task<int> UpdateProductCount(int productId, int count)
         {
-            string sql = "UPDATE Stock SET [Count] = @Count WHERE ProductId = @ProductId";
+            string sql = @"DECLARE @CountTemp int=0
+                          SELECT @CountTemp = [Count] from Stock WHERE ProductId = @ProductId
+                          IF ( @CountTemp >= @Count )
+                          Begin
+                            UPDATE Stock SET [Count] = [Count]-@Count WHERE ProductId = @ProductId
+                          End";
 
             return _dataHelper.ExecuteAsync(sql, new { productId, count });
         }

@@ -15,13 +15,13 @@ namespace Infrastucture.Extension
             services.AddTransient<IDataHelper, DataHelper>();
 
             //Repository
-            //services.AddTransient<IBasketRepository, BasketRepository>();
-            //services.AddTransient<IStockRepository, StockRepository>();
-            services.AddTransient<IBasketRepository, FakeBasketRepository>();
-            services.AddTransient<IStockRepository, FakeStockRepository>();
+            //services.AddScoped<IBasketRepository, BasketRepository>();
+            //services.AddScoped<IStockRepository, StockRepository>();
+            services.AddScoped<IBasketRepository, FakeBasketRepository>();
+            services.AddScoped<IStockRepository, FakeStockRepository>();
 
-            services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationHandler<,>));
-            //services.AddTransient(typeof(IPipelineBehavior<,>), typeof(CommonRequestHandler<,>));
+            services.AddScoped(typeof(IPipelineBehavior<,>), typeof(ValidationHandler<,>));
+            //services.AddScoped(typeof(IPipelineBehavior<,>), typeof(CommonRequestHandler<,>));
 
             services.AddMediatR(typeof(AddProductToBasketRequestHandler));
 

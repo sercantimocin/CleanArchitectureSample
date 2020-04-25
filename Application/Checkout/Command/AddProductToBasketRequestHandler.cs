@@ -30,7 +30,7 @@ namespace Application.Products.Command
                 return new ResponseModel<bool>(HttpStatusCode.OK, "Insufficient product count", false);
             }
 
-            using (TransactionScope scope = new TransactionScope())
+            using (TransactionScope scope = new TransactionScope(TransactionScopeOption.RequiresNew, new TransactionOptions { IsolationLevel = IsolationLevel.RepeatableRead }))
             {
                 int effectedCount = await _stockRepository.UpdateProductCount(request.ProductId, request.Count);
                 if (effectedCount <= 0)
