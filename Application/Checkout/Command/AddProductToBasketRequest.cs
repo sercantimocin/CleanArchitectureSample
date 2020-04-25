@@ -7,7 +7,7 @@ namespace Application.Checkout.Command
     {
         public int BasketId { get; set; }
 
-        public int ProducId { get; set; }
+        public int ProductId { get; set; }
 
         public int Count { get; set; }
     }

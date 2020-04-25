@@ -23,7 +23,7 @@ namespace Application.Products.Command
 
         public async Task<ResponseModel<bool>> Handle(AddProductToBasketRequest request, CancellationToken cancellationToken)
         {
-            int stockCount = await _stockRepository.GetProductCount(request.ProducId);
+            int stockCount = await _stockRepository.GetProductCount(request.ProductId);
 
             if (request.Count > stockCount)
             {
@@ -32,7 +32,7 @@ namespace Application.Products.Command
 
             using (TransactionScope scope = new TransactionScope())
             {
-                int effectedCount = await _stockRepository.UpdateProductCount(request.ProducId, request.Count);
+                int effectedCount = await _stockRepository.UpdateProductCount(request.ProductId, request.Count);
                 if (effectedCount <= 0)
                 {
                     return new ResponseModel<bool>(HttpStatusCode.OK, "The operation cannot successful", false);
@@ -41,7 +41,7 @@ namespace Application.Products.Command
                 effectedCount = await _basketRepository.AddProduct(new BasketProduct
                 {
                     BasketId = request.BasketId,
-                    ProductId = request.ProducId,
+                    ProductId = request.ProductId,
                     Count = request.Count
                 });
 

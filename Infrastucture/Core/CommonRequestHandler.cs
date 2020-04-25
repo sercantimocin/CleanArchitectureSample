@@ -5,12 +5,8 @@ using System.Threading.Tasks;
 
 namespace Infrastucture.Core
 {
-    public class CommonRequestHandler<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse> where TRequest : IRequest
+    public class CommonRequestHandler<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>
     {
-        public CommonRequestHandler()
-        {
-        }
-
         public async Task<TResponse> Handle(TRequest request, CancellationToken cancellationToken, RequestHandlerDelegate<TResponse> next)
         {
             var response = await next();
