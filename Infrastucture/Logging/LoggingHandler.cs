@@ -1,5 +1,6 @@
 ﻿using MediatR;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -18,7 +19,7 @@ namespace Infrastucture.Logging
         {
             _logger.LogInformation($"Handling {typeof(TRequest).Name}");
             var response = await next();
-            _logger.LogInformation($"Handled {typeof(TResponse).Name}");
+            _logger.LogInformation($"Handled result: {JsonConvert.SerializeObject(response)}");
 
             return response;
         }

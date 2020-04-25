@@ -1,4 +1,5 @@
 ﻿using Application.Products.Command;
+using Infrastucture.Logging;
 using Infrastucture.Persistance;
 using Infrastucture.Validation;
 using MediatR;
@@ -21,6 +22,7 @@ namespace Infrastucture.Extension
             services.AddScoped<IStockRepository, FakeStockRepository>();
 
             services.AddScoped(typeof(IPipelineBehavior<,>), typeof(ValidationHandler<,>));
+            services.AddScoped(typeof(IPipelineBehavior<,>), typeof(LoggingHandler<,>));
 
             services.AddMediatR(typeof(AddProductToBasketRequestHandler));
 
