@@ -1,13 +1,9 @@
-﻿using Domain.Chekout;
-using Infrastucture.Model;
+﻿using Application.Checkout.Command;
+using Common.Model;
+using Domain.Checkout;
 using MediatR;
-using Persistance.Basket;
 using Persistance.Checkout;
-using Persistance.Chekout;
-using System;
-using System.Collections.Generic;
 using System.Net;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Transactions;
@@ -27,10 +23,6 @@ namespace Application.Products.Command
 
         public async Task<ResponseModel<bool>> Handle(AddProductToBasketRequest request, CancellationToken cancellationToken)
         {
-            /*
-             * 1-)validate model
-             */
-
             int stockCount = await _stockRepository.GetProductCount(request.ProducId);
 
             if (request.Count > stockCount)

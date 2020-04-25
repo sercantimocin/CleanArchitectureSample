@@ -1,14 +1,8 @@
-﻿using Common.Model;
+﻿using Domain.Checkout;
 using Infrastucture.Persistance;
-using Microsoft.Extensions.Options;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
-using Domain.Chekout;
-using Persistance.Chekout;
 
-namespace Persistance.Basket
+namespace Persistance.Checkout
 {
     public class BasketRepository : IBasketRepository
     {

@@ -1,10 +1,7 @@
-﻿using Infrastucture.Model;
+﻿using Common.Model;
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
-namespace Application.Products.Command
+namespace Application.Checkout.Command
 {
     public class AddProductToBasketRequest : IRequest<ResponseModel<bool>>
     {

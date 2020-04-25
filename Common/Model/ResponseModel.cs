@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Net;
-using System.Text;
+﻿using System.Net;
 
-namespace Infrastucture.Model
+namespace Common.Model
 {
     public class BaseResponseModel
     {

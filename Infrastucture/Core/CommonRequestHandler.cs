@@ -1,8 +1,9 @@
+using MediatR;
 using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace MediatR.Examples
+namespace Infrastucture.Core
 {
     public class CommonRequestHandler<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse> where TRequest : IRequest
     {

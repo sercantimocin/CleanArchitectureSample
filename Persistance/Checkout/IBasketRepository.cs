@@ -1,7 +1,7 @@
-﻿using System.Threading.Tasks;
-using Domain.Chekout;
+﻿using Domain.Checkout;
+using System.Threading.Tasks;
 
-namespace Persistance.Chekout
+namespace Persistance.Checkout
 {
     public interface IBasketRepository
     {
