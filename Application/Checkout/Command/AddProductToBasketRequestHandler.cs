@@ -24,7 +24,7 @@ namespace Application.Products.Command
 
         public async Task<ResponseModel<bool>> Handle(AddProductToBasketRequest request, CancellationToken cancellationToken)
         {
-            // StockCount get value via GetProductCountRequestHandler
+            // StockCount get value via GetProductCountRequestHandler which run before the current request
             if (request.Count > request.StockCount)
             {
                 return new ResponseModel<bool>(HttpStatusCode.OK, Errors.InsufficientStockCount, false);
