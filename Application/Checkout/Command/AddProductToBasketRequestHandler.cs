@@ -23,9 +23,7 @@ namespace Application.Products.Command
 
         public async Task<ResponseModel<bool>> Handle(AddProductToBasketRequest request, CancellationToken cancellationToken)
         {
-            int stockCount = await _stockRepository.GetProductCount(request.ProductId);
-
-            if (request.Count > stockCount)
+            if (request.Count > request.StockCount)
             {
                 return new ResponseModel<bool>(HttpStatusCode.OK, "Insufficient product count", false);
             }

@@ -23,7 +23,7 @@ namespace Api
         public void ConfigureServices(IServiceCollection services)
         {
             services.RegisterServices(Configuration);
-            services.AddControllers();
+            services.AddControllers().AddNewtonsoftJson();
             services.AddMvc().AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<AddProductToBasketRequestValidator>());
 
             services.AddSwaggerGen(c =>
