@@ -23,6 +23,7 @@ namespace Application.Products.Command
 
         public async Task<ResponseModel<bool>> Handle(AddProductToBasketRequest request, CancellationToken cancellationToken)
         {
+            // StockCount get value via GetProductCountRequestHandler
             if (request.Count > request.StockCount)
             {
                 return new ResponseModel<bool>(HttpStatusCode.OK, "Insufficient product count", false);
