@@ -17,7 +17,7 @@ namespace Persistance.Checkout
         {
             string sql = "INSERT INTO BasketProduct (BasketId, ProductId, [Count]) VALUES (@BasketId, @ProductId, @Count)";
 
-            return _dataHelper.ExecuteAsync(sql, new { basketProduct.BasketId, basketProduct.ProductId });
+            return _dataHelper.ExecuteAsync(sql, new { basketProduct.BasketId, basketProduct.ProductId, basketProduct.Count });
         }
     }
 }
