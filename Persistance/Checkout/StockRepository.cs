@@ -14,7 +14,7 @@ namespace Persistance.Checkout
 
         public Task<int> GetProductCount(int productId)
         {
-            string sql = "SELECT [Count] FROM Stock (NOLOCK)  WHERE ProductId = @ProductId";
+            string sql = "SELECT [Count] FROM Stock (NOLOCK) WHERE ProductId = @ProductId";
 
             return _dataHelper.QuerySingleAsync<int>(sql, new { productId });
         }
@@ -24,9 +24,10 @@ namespace Persistance.Checkout
             string sql = @"DECLARE @CountTemp int=0
                           SELECT @CountTemp = [Count] from Stock WHERE ProductId = @ProductId
                           IF ( @CountTemp >= @Count )
-                          Begin
-                            UPDATE Stock SET [Count] = [Count]-@Count WHERE ProductId = @ProductId
-                          End";
+                          BEGIN
+                            @CountTemp=@CountTemp-@Count;
+                            UPDATE Stock SET [Count] = @CountTemp WHERE ProductId = @ProductId
+                          END";
 
             return _dataHelper.ExecuteAsync(sql, new { productId, count });
         }
