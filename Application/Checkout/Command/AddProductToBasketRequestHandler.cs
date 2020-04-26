@@ -1,4 +1,5 @@
 ﻿using Application.Checkout.Command;
+using Common.Const;
 using Common.Model;
 using Domain.Checkout;
 using MediatR;
@@ -26,7 +27,7 @@ namespace Application.Products.Command
             // StockCount get value via GetProductCountRequestHandler
             if (request.Count > request.StockCount)
             {
-                return new ResponseModel<bool>(HttpStatusCode.OK, "Insufficient product count", false);
+                return new ResponseModel<bool>(HttpStatusCode.OK, Errors.InsufficientStockCount, false);
             }
 
             using (TransactionScope scope = new TransactionScope(TransactionScopeOption.RequiresNew, new TransactionOptions { IsolationLevel = IsolationLevel.RepeatableRead }))
@@ -34,7 +35,8 @@ namespace Application.Products.Command
                 int effectedCount = await _stockRepository.UpdateProductCount(request.ProductId, request.Count);
                 if (effectedCount <= 0)
                 {
-                    return new ResponseModel<bool>(HttpStatusCode.OK, "The operation cannot successful", false);
+                    scope.Dispose();
+                    return new ResponseModel<bool>(HttpStatusCode.OK, Errors.OperationFailed, false);
                 }
 
                 //TODO AutoMapper useful for object mapping
@@ -47,7 +49,8 @@ namespace Application.Products.Command
 
                 if (effectedCount <= 0)
                 {
-                    return new ResponseModel<bool>(HttpStatusCode.OK, "The operation cannot successful", false);
+                    scope.Dispose();
+                    return new ResponseModel<bool>(HttpStatusCode.OK, Errors.OperationFailed, false);
                 }
 
                 scope.Complete();
